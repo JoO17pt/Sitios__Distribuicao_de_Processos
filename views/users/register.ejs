@@ -1,0 +1,56 @@
+<%- include('../partials/header.ejs') %>
+
+<body>
+  <%- include('../partials/navbar.ejs') %>
+
+  <div class="container">
+
+    <br>
+
+    <%if(message != null) {%>
+
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      <strong><%=message%>!</strong> Tente de novo.
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
+    <%}%>
+
+    <div class="card mt-5" style="margin-top: 1rem !important">
+      <div class="card-header">
+        <b>Registo de novo utilizador</b>
+      </div>
+      <div class="card-body">
+        <!-- <form action="/users/register" method="POST" enctype="multipart/form-data"> -->
+        <!-- <form action="http://localhost:3000/users/register" method="POST"> -->
+        <form action="/users/register" method="POST">
+          <span>Email</span>
+          <input class="form-control" name="email" type="email" placeholder="email@exemplo.com" required /><br />
+          <span>Password</span>
+          <input class="form-control" name="password" type="password" placeholder="******" required /><br />
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="billingScheme" value="subscription" id="flexRadioDefault1" checked>
+            <label class="form-check-label" for="flexRadioDefault1">
+              Pretendo utilizar a app de forma ilimitada durante um período de tempo
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="billingScheme" value="clicks" id="flexRadioDefault2">
+            <label class="form-check-label" for="flexRadioDefault2">
+              Pretendo subscrever um número limitado de pesquisas
+            </label>
+          </div>
+          <br />
+          <button type="submit" class="btn btn-dark btn-block">
+            Submeter
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+<%- include('../partials/bootstrapScripts.ejs') %>
+
+    </html>

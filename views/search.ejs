@@ -1,0 +1,244 @@
+<%- include('partials/header.ejs') %>
+
+<body>
+
+  <%- include('partials/navbar.ejs') %>
+
+
+  <div class="container">
+
+ 
+    <br>
+
+    <%if(message != null) {%>
+
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Bem-vindo</strong> <%=user.email.slice(0,user.email.indexOf('@'))%>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+  
+      <%}%>
+
+    <div class="accordion accordion-flush" id="accordionExample">
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            <b>Pesquisa</b>
+          </button>
+        </h2>
+        <div id="collapseOne" class="accordion-collapse collapse<%if(method == 'get') {%> show<%}%>" data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+            <!-- =========================================================================================================================================== -->
+            <form action="/search" method="POST">
+
+          <div class="row">
+            <div class="col">
+
+              <div class="form-floating">
+                <select class="form-select" id="floatingSelect" aria-label="Floating label select example" name="court">
+                  <option selected>Seleciona o tribunal</option>
+                  <%courts[0].forEach(court => {%>
+                  <option value="<%=court.courtID%>"><%=court.courtName%></option>
+                  <%})%>
+                </select>
+                <label for="floatingSelect">Tribunal</label>
+              </div>
+            </div>
+
+            <div class="col">
+
+              <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingInput" placeholder="Processo" name="processo">
+                <label for="floatingInput">Processo</label>
+              </div>
+
+            </div>
+
+          </div>
+
+          <div class="row">
+            <div class="col">
+
+              <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingInput" placeholder="Intervenientes" name="intervenientes">
+                <label for="floatingInput">Intervenientes</label>
+              </div>
+
+            </div>
+            <div class="col">
+
+              <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingInput" placeholder="Informações" name="informacoes">
+                <label for="floatingInput">Informações</label>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col">
+
+              <div class="form-floating mb-3">
+                <input type="date" class="form-control" id="floatingInput" placeholder="Data de início" name="beginDate">
+                <label for="floatingInput">Data de início</label>
+              </div>
+
+            </div>
+
+            <div class="col">
+
+              <div class="form-floating mb-3">
+                <input type="date" class="form-control" id="floatingInput" placeholder="Data de fim" name="endDate">
+                <label for="floatingInput">Data de fim</label>
+              </div>
+
+            </div>
+          </div>
+
+
+
+          <button type="submit" class="btn btn-dark btn-block">Submeter</button>
+
+          </form>
+          <!-- =========================================================================================================================================== -->
+        </div>
+      </div>
+    </div>
+    <div class="accordion-item" <%if(method == 'get') {%> hidden<%}%>>
+    <h2 class="accordion-header">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+        <b>Resultados</b>
+      </button>
+    </h2>
+    <div id="collapseTwo" class="accordion-collapse collapse <%if(method == 'post') {%> show<%}%>" data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+            <!-- =========================================================================================================================================== -->
+            
+            <%if(method == 'post' && lawSuits[0].length != 0) {%> <table class=" table table-striped">
+
+      <p class="text-center"><i><%if(entries > 0) {%>Processos: <%=entries%><%}%> (pagínas: <span id="totalPages"><%=Math.ceil(entries/10)%></span>)</i></p>
+
+      <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+          <li id="prevPage" class="page-item" role='button'>
+            <a class="page-link" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+          <li class="page-item"><a id="currPage" class="page-link"><%=page%></a></li>
+          <li id="nextPage" class="page-item" role='button'>
+            <a class="page-link" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <thead>
+        <tr>
+          <th scope="col" class="table-dark">Tribunal</th>
+          <!-- <th scope="col">stringDate</th> -->
+          <th scope="col" class="table-dark">Datas</th>
+          <th scope="col" class="table-dark">Intervenientes</th>
+          <th scope="col" class="table-dark">Processo</th>
+          <th scope="col" class="table-dark">Informação</th>
+        </tr>
+      </thead>
+      <tbody class="table-group-divider">
+
+        <%lawSuits[0].forEach((lawSuits, x) => { %>
+        <tr id="<%=x%>">
+          <td><%=lawSuits.courtName%></td>
+          <!-- <td><%=lawSuits.stringDate%></td> -->
+          <td><%=lawSuits.datas%></td>
+          <td><%=lawSuits.intervenientes%></td>
+          <td><%=lawSuits.processo%></td>
+          <td><%=lawSuits.informacao%></td>
+        </tr>
+        <%})%>
+      </tbody>
+      </table>
+      <%} else {%>
+      <p class="text-center">Sem resultados encontrados</p>
+      <%}%>
+            <!-- =========================================================================================================================================== -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  </div>
+  <%if(method === "post") {%>
+      <form id="changePage" action="/search" method="POST">
+        <input type="text" name="court" value="<%=request.court%>" hidden>
+        <input type="text" name="processo" value="<%=request.processo%>" hidden>
+        <input type="text" name="intervenientes" value="<%=request.intervenientes%>" hidden>
+        <input type="text" name="informacoes" value="<%=request.informacoes%>" hidden>
+        <input type="date" name="beginDate" value="<%=request.beginDate%>" hidden>
+        <input type="date" name="endDate" value="<%=request.endDate%>" hidden>
+        <input id="pageInput" type="number" name="page" value="" hidden>
+      </form>
+      <%}%>
+
+      <%- include('partials/bootstrapScripts.ejs') %>
+
+    <script>
+      const nextPage = document.getElementById("nextPage")
+      const prevPage = document.getElementById("prevPage")
+      const currPage = document.getElementById("currPage").innerText
+      const totalPages = document.getElementById("totalPages").innerText
+      const pageInput = document.getElementById("pageInput")
+      const changePage = document.getElementById("changePage")
+
+      nextPage.addEventListener("click", e => {
+        if(Number(currPage) < Number(totalPages)) {
+        pageInput.setAttribute('value',Number(currPage)+1)
+        changePage.submit()
+      }
+      })
+      
+      prevPage.addEventListener("click", e => {
+        if (Number(currPage) > 1) {
+        pageInput.setAttribute('value',Number(currPage)-1)
+        changePage.submit()
+      }
+      })
+
+    </script>
+
+<style> 
+
+.accordion-flush.accordion {
+  --bs-accordion-btn-bg: #ffffff;
+  --bs-accordion-active-bg: #ffffff;
+  --bs-accordion-active-color: #000000;
+  --bs-accordion-bg: #ffffff;
+  --bs-accordion-color: #000000;
+  --bs-accordion-btn-focus-box-shadow: none;
+  --bs-accordion-btn-focus-border-color: unset;
+}
+
+.accordion-flush .accordion-button {
+  border-top: 1px solid #000000;
+}
+
+.accordion-flush .accordion-item:last-child .accordion-button.collapsed,
+.accordion-flush .accordion-item:last-child .accordion-body {
+  border-bottom: 1px solid #000000;
+}
+
+.accordion-button::after {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-plus' viewBox='0 0 16 16'%3E%3Cpath d='M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z'/%3E%3C/svg%3E");
+  transition: all 0.5s;
+}
+.accordion-button:not(.collapsed)::after {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-dash' viewBox='0 0 16 16'%3E%3Cpath d='M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z'/%3E%3C/svg%3E");
+}
+
+</style>
+</body>
+
+</html>

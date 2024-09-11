@@ -1,0 +1,42 @@
+<%- include('partials/header.ejs') %>
+
+<body>
+
+  <%- include('partials/navbar.ejs') %>
+
+  <%console.log(user)%>
+  <br>
+  <div class="container">
+
+    <%if(message != null) {%>
+
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      <strong>Conta inativa!</strong> Aguarde contacto
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
+    <%}%>
+
+  <h3 style="text-align: center">Bem-vindo à melhor plataforma de consulta de processos</h3>
+
+  <br>
+  <p>- Dados desde setembro de 2023</p>
+  <p>- Possibilidade ilimitada de pesquisa</p>
+  <p>- Interface aimples e intuitiva</p>
+
+  <!-- <img src="/images/example1.png"> -->
+
+  <br>
+
+  <h3 style="text-align: center">Começa já a usar!</h3>
+
+  <p>1. Regista-te</p>
+  <p>2. Seleciona o modelo que mais se adequa às tuas necessidades: <b>subscrição</b> ou <b>pacote de pesquisas</b></p>
+  <p>3. Aguarda o nosso contacto para ativação da tua conta</p>
+
+  </div>
+</body>
+
+<%- include('partials/bootstrapScripts.ejs') %>
+
+    </html>

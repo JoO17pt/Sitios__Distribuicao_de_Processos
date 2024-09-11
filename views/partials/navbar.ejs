@@ -1,0 +1,72 @@
+<nav class="navbar fixed-top bg-body-tertiary" data-bs-theme="dark">
+  <div class="container-fluid">
+
+    <div class="col text-start"></div>
+    <!-- <div class="col text-start"><%if(user != undefined) {%> -->
+
+      <!-- <span class="navbar-brand">Bem-vindo <%=user.email%></span><%}%></div> -->
+    <!-- <div class="col text-center"><span class="navbar-brand"><i>Sítios | Plataforma de consulta de processos</i></span></div> -->
+    <div class="col text-center"><span class="navbar-brand">Sítios</span></div>
+    <div class="col text-end">
+
+      <button class="btn btn-light" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">☰</button>
+
+      <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+        <div class="offcanvas-header">
+          <%if(user != undefined) {%><h5 class="offcanvas-title" id="offcanvasRightLabel">Bem-vindo <%=user.email.slice(0,user.email.indexOf('@'))%></h5><%}%>
+          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body row align-items-top text-end">
+            <div>
+
+              <ul class="nav flex-column">
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="/">Página principal</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/search">Pesquisar</a>
+                </li>
+
+                <%if(user != undefined) {%>
+      <li class="nav-item">
+        <a class="nav-link" href="/users/logout">Logout</a>
+      </li>
+
+      <%} else {%>
+      <li class="nav-item">
+        <a class="nav-link" href="/users/login">Login</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/users/register">Registo</a>
+      </li>
+
+      <%}%>
+              </ul>
+          </div>
+            <div class="row align-items-end text-start">
+              <div>
+              <%if(user != undefined) {%>
+
+      <span>Estado da conta: <%if(user.valid == false || (user.billingScheme == 'clicks' && user.clicks == 0) || (user.billingScheme == 'subscription' && Date.parse(user.expirationDate) < new Date())){%>Em validação<%} else {%>Ativa</span><br>
+
+      <%if(user.billingScheme == 'subscription'){%>
+      <span>Tipo de conta: Subscrição</span><br>
+      <span>Data de expiração: <%=user.expirationDate.toString().slice(0,user.expirationDate.toString().indexOf('T'))%></span><br>
+      <%} else {%>
+      <span>Tipo de conta: Pacote de pesquisas</span><br>
+      <span>Pesquisas restantes: <%=user.clicks%></span><br>
+      <%}%>
+          
+          <%}%>
+      <%}%>
+      </div>
+        </div>
+      </div>
+    </div>
+    </div>
+
+  </div>
+</nav>
+
+<br>
+<br>
