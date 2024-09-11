@@ -1,4 +1,4 @@
-import Sequelize from "Sequelize";
+import Sequelize from "sequelize";
 
 const connection = new Sequelize('APPDOZE','root','root',{
     // host: 'localhost',
