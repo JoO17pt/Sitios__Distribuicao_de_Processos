@@ -5,3 +5,32 @@ body {
     font-weight: 300;
     font-style: normal;
 }
+
+
+#backgroundImage {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    /* display: block;
+  margin-left: auto;
+  margin-right: auto; */
+    /* box-shadow: 0 0 10px black inset; */
+}
+
+.textImage {
+    /* width: 27%;
+    height: 26%; */
+    /* object-fit: contain; */
+    /* position: absolute;
+    top: 25%;
+    left: 40%; */
+    /* display: block;
+    margin-left: auto;
+    margin-right: auto; */
+    color: white;
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%)
+
+}
