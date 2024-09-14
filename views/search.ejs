@@ -40,7 +40,7 @@
               </div>
 
           <div class="row">
-            <div class="col">
+            <div class="col-12 col-md-6 mb-3">
 
               <div class="form-floating">
                 <select class="form-select" id="floatingSelect" aria-label="Floating label select example" name="court">
@@ -53,8 +53,7 @@
   </div>
   </div>
 
-
-  <div class="col">
+  <div class="col-12 col-md-6 mb-3">
 
     <div class="form-floating mb-3" id="intervCont">
       <input type="text" class="form-control" id="floatingInput" placeholder="Intervenientes" name="intervenientes">
@@ -66,7 +65,7 @@
   </div>
 
   <div class="row">
-    <div class="col">
+    <div class="col-12 col-md-6 mb-3">
 
       <div class="form-floating mb-3">
         <input type="date" class="form-control" id="floatingInput" placeholder="Data de início" name="beginDate">
@@ -75,7 +74,7 @@
 
     </div>
 
-    <div class="col">
+    <div class="col-12 col-md-6 mb-3">
 
       <div class="form-floating mb-3">
         <input type="date" class="form-control" id="floatingInput" placeholder="Data de fim" name="endDate">
@@ -88,7 +87,7 @@
   <div class="row">
 
 
-    <div class="col">
+    <div class="col-12 col-md-6 mb-3">
 
       <div class="form-floating mb-3" id="procCont">
         <input type="text" class="form-control" id="floatingInput" placeholder="Processo" name="processo" pattern="[0-9]{1,}/[0-9][0-9].[0-9][A-Z][0-9][A-Z][A-Z][A-Z]">
@@ -97,7 +96,7 @@
 
     </div>
 
-    <div class="col">
+    <div class="col-12 col-md-6 mb-3">
 
       <div class="form-floating mb-3" hidden>
         <input type="text" class="form-control" id="floatingInput" placeholder="Informações" name="informacoes">
@@ -208,7 +207,7 @@
           <td><%=lawSuits.courtName%></td>
           <!-- <td><%=lawSuits.stringDate%></td> -->
           <!-- <td><%=lawSuits.datas%></td> -->
-          <td><%=lawSuits.intervenientes%><span class="moreInfo" data-bs-toggle="modal" data-bs-target="#exampleModal">| Ver mais informações</span></td>
+          <td><%=lawSuits.intervenientes%><span class="moreInfo" data-bs-toggle="modal" data-bs-target="#exampleModal">| Mais informações</span></td>
           <!-- <td><%=lawSuits.processo%></td> -->
           <!-- <td><%=lawSuits.informacao%></td> -->
         </tr>
@@ -309,29 +308,29 @@
 
       moreInfo.forEach(element => {
         element.addEventListener("click", e => {
-          
+
           var tempID = e.target.parentElement.parentElement.getAttribute("id")
-          var tempLawSuit = document.getElementById(tempID.slice(0,tempID.length-6)).cloneNode(true)
+          var tempLawSuit = document.getElementById(tempID.slice(0, tempID.length - 6)).cloneNode(true)
 
 
-          modalTitle.innerHTML = "Processo " + tempLawSuit.children[3].innerHTML.slice(0,tempLawSuit.children[3].innerHTML.indexOf("Juízo"))
+          modalTitle.innerHTML = "Processo " + tempLawSuit.children[3].innerHTML.slice(0, tempLawSuit.children[3].innerHTML.indexOf("Juízo"))
           // console.log(tempLawSuit.children[3].innerHTML.slice(0,tempLawSuit.children[3].innerHTML.indexOf("Juízo")))
-          
-          tempLawSuit.children[0].innerHTML = "Tribunal: "+tempLawSuit.children[0].innerHTML;
-          tempLawSuit.children[1].innerHTML = "Datas: "+tempLawSuit.children[1].innerHTML;
-          tempLawSuit.children[2].innerHTML = "Intervenientes: "+tempLawSuit.children[2].innerHTML;
-          tempLawSuit.children[3].innerHTML = "Processo: "+tempLawSuit.children[3].innerHTML;
-          tempLawSuit.children[4].innerHTML = "Informação: "+tempLawSuit.children[4].innerHTML;
 
-          tempLawSuit.innerHTML = tempLawSuit.innerHTML.replaceAll("<td>","<tr>").replaceAll("</td>","<br><br></tr>")
+          tempLawSuit.children[0].innerHTML = "Tribunal: " + tempLawSuit.children[0].innerHTML;
+          tempLawSuit.children[1].innerHTML = "Datas: " + tempLawSuit.children[1].innerHTML;
+          tempLawSuit.children[2].innerHTML = "Intervenientes: " + tempLawSuit.children[2].innerHTML;
+          tempLawSuit.children[3].innerHTML = "Processo: " + tempLawSuit.children[3].innerHTML;
+          tempLawSuit.children[4].innerHTML = "Informação: " + tempLawSuit.children[4].innerHTML;
+
+          tempLawSuit.innerHTML = tempLawSuit.innerHTML.replaceAll("<td>", "<tr>").replaceAll("</td>", "<br><br></tr>")
 
           modealTable.innerHTML = tempLawSuit.innerHTML
 
 
           modal.modal('show')
-          
 
-          
+
+
 
         })
       });

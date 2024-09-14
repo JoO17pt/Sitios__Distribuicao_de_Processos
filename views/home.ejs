@@ -24,12 +24,13 @@
 
   <!-- <img id="backgroundImage" src="/images/mac.jpg"> -->
 
-  <div>
+  <div id="imageContainer">
 
-    <div class="textImage">
-      <p>- Dados desde setembro de 2023</p>
-      <p>- Possibilidade ilimitada de pesquisa</p>
-      <p>- Interface simples e intuitiva</p>
+    <div id="textContainer">
+      <p>Dados desde setembro 2023</p>
+      <p><%=Number(numberLawSuits).toLocaleString()%> processos disponíveis</p>
+      <p>Atualizado em <%=lastLawSuit%></p>
+      <p>Interface simples e intuitiva</p>
     </div>
 
 
@@ -38,9 +39,9 @@
 
 
     <!-- Image for phones -->
-    <!-- <source id="backgroundImage" srcset="/images/tablet.jpg" media="(max-width: 767px)"> -->
+    <source id="backgroundImage" srcset="/images/phone.png" media="(max-width: 767px)">
     <!-- Image for larger devices like PCs -->
-    <source id="backgroundImage" srcset="/images/mac.jpg" media="(min-width: 768px)">
+    <source id="backgroundImage" srcset="/images/pc.png" media="(min-width: 768px)">
     <!-- Fallback image if none of the conditions match -->
     <img id="backgroundImage" src="/images/mac.jpg" alt="Responsive Image">
   </picture>

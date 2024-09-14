@@ -6,34 +6,27 @@ body {
     font-style: normal;
 }
 
+#imageContainer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 #backgroundImage {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    /* display: block;
-  margin-left: auto;
-  margin-right: auto; */
-    /* box-shadow: 0 0 10px black inset; */
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
-.textImage {
-    /* width: 27%;
-    height: 26%; */
-    /* object-fit: contain; */
-    /* position: absolute;
-    top: 25%;
-    left: 40%; */
-    /* display: block;
-    margin-left: auto;
-    margin-right: auto; */
-    color: white;
-    position: absolute;
-    top: 35%;
-    left: 50%;
-    transform: translate(-50%, -50%)
-
+#textContainer {
+  position: absolute;
+  color: black; /* Customize text color as needed */
+  text-align: center;
 }
+
 
 /* By default, hide the phone-only elements */
 .phone-only {
@@ -55,4 +48,9 @@ body {
     .pc-only {
       display: block;
     }
+  }
+
+  .moreInfo {
+    color:#2964CE;
+    font-weight:bold;
   }
