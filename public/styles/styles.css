@@ -34,3 +34,25 @@ body {
     transform: translate(-50%, -50%)
 
 }
+
+/* By default, hide the phone-only elements */
+.phone-only {
+    display: none;
+  }
+  
+  /* Show phone-only elements and hide pc-only elements on smaller screens (phones) */
+  @media (max-width: 767px) {
+    .phone-only {
+      display: block;
+    }
+    .pc-only {
+      display: none;
+    }
+  }
+  
+  /* Optional: Ensure the PC-only elements are displayed on larger screens */
+  @media (min-width: 768px) {
+    .pc-only {
+      display: block;
+    }
+  }
