@@ -1,9 +1,12 @@
 import Sequelize from "sequelize";
 
-const connection = new Sequelize('APPDOZE','root','root',{
+import dotenv from "dotenv";
+dotenv.config({ path: "./config/config.env" });
+
+const connection = new Sequelize('APPDOZE',process.env.DBUSER,process.env.DBPASS,{
     // host: 'localhost',
-    host: '0.tcp.eu.ngrok.io',
-    port: '15921',
+    host: process.env.HOST,
+    port: process.env.PORT,
     dialect: 'mysql',
     logging: true
 });
