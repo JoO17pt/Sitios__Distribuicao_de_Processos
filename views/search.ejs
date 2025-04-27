@@ -44,11 +44,23 @@
 
               <div class="form-floating">
                 <select class="form-select" id="floatingSelect" aria-label="Floating label select example" name="court">
-                  <option selected>Seleciona o tribunal</option>
-                  <%courts[0].forEach(court => {%>
+    <option <%if(method !== "post"){%>selected<%}%>>Seleciona o tribunal</option>
+   
+    <%if(method !== "post") {%>
+
+    <%courts[0].forEach(court => {%>
     <option value="<%=court.courtID%>"><%=court.courtName%></option>
     <%})%>
-    </select>
+
+    <%} else {%>
+
+    <%courts[0].forEach(court => {%>
+    <option <%if(request.court == court.courtID) {%>selected<%}%> value="<%=court.courtID%>"><%=court.courtName%></option>
+    <%})%>
+
+    <%}%>
+    
+  </select>
     <label for="floatingSelect">Tribunal</label>
   </div>
   </div>
@@ -56,9 +68,9 @@
   <div class="col-12 col-md-6 mb-3">
 
     <div class="form-floating mb-3" id="intervCont">
-      <input type="text" class="form-control" id="floatingInput" placeholder="Intervenientes" name="intervenientes">
-      <label for="floatingInput">Intervenientes</label>
-    </div>
+      <input type="text" class="form-control" id="floatingInput" placeholder="Intervenientes" name="intervenientes" value="<%=method === "post" ? request.intervenientes : ""%>">
+    <label for="floatingInput">Intervenientes</label>
+  </div>
 
   </div>
 
@@ -68,7 +80,7 @@
     <div class="col-12 col-md-6 mb-3">
 
       <div class="form-floating mb-3">
-        <input type="date" class="form-control" id="floatingInput" placeholder="Data de início" name="beginDate">
+        <input type="date" class="form-control" id="floatingInput" placeholder="Data de início" name="beginDate" value="<%=method === "post" ? request.beginDate : ""%>">
         <label for="floatingInput">Data de início</label>
       </div>
 
@@ -77,7 +89,7 @@
     <div class="col-12 col-md-6 mb-3">
 
       <div class="form-floating mb-3">
-        <input type="date" class="form-control" id="floatingInput" placeholder="Data de fim" name="endDate">
+        <input type="date" class="form-control" id="floatingInput" placeholder="Data de fim" name="endDate" value="<%=method === "post" ? request.endDate : ""%>">
         <label for="floatingInput">Data de fim</label>
       </div>
 
@@ -90,7 +102,7 @@
     <div class="col-12 col-md-6 mb-3">
 
       <div class="form-floating mb-3" id="procCont">
-        <input type="text" class="form-control" id="floatingInput" placeholder="Processo" name="processo" pattern="[0-9]{1,}/[0-9][0-9].[0-9][A-Z][0-9][A-Z][A-Z][A-Z]">
+        <input type="text" class="form-control" id="floatingInput" placeholder="Processo" name="processo" pattern="[0-9]{1,}/[0-9][0-9].[0-9][A-Z][0-9][A-Z][A-Z][A-Z]" value="<%=method === "post" ? request.processo : ""%>">
         <label for="floatingInput">Processo</label>
       </div>
 

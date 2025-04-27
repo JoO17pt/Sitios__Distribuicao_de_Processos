@@ -23,32 +23,42 @@
       <div class="card-body">
         <!-- <form action="/users/register" method="POST" enctype="multipart/form-data"> -->
         <!-- <form action="http://localhost:3000/users/register" method="POST"> -->
-        <form action="/users/register" method="POST">
-          <span>Email</span>
-          <input class="form-control" name="email" type="email" placeholder="email@exemplo.com" required /><br />
-          <span>Password</span>
-          <input class="form-control" name="password" type="password" placeholder="******" required /><br />
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="billingScheme" value="subscription" id="flexRadioDefault1" checked>
-            <label class="form-check-label" for="flexRadioDefault1">
-              Pretendo utilizar a app de forma ilimitada durante um período de tempo
-            </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="billingScheme" value="clicks" id="flexRadioDefault2">
-            <label class="form-check-label" for="flexRadioDefault2">
-              Pretendo subscrever um número limitado de pesquisas
-            </label>
-          </div>
-          <br />
-          <button type="submit" class="btn btn-dark btn-block">
-            Submeter
-          </button>
-          <br>
-          <br>
-          <p id="sign_up">Já tens conta? <a href="/users/login">Efetuar login</a><br></p>
-
-        </form>
+          <form action="/users/register" method="POST">
+            <span>Email</span>
+            <input class="form-control" name="email" type="email" placeholder="email@exemplo.com" required /><br />
+            
+            <span>Password</span>
+            <input class="form-control" id="password" name="password" type="password" placeholder="******" required /><br />
+            
+            <span>Confirmar Password</span>
+            <input class="form-control" id="confirmPassword" type="password" placeholder="******" required /><br />
+            
+            <!-- Mensagem de erro -->
+            <p id="passwordMismatchMessage" style="color: red; display: none;">
+              As passwords não coincidem.
+            </p>
+          
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="billingScheme" value="subscription" id="flexRadioDefault1" checked>
+              <label class="form-check-label" for="flexRadioDefault1">
+                Pretendo utilizar a app de forma ilimitada durante um período de tempo
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="billingScheme" value="clicks" id="flexRadioDefault2">
+              <label class="form-check-label" for="flexRadioDefault2">
+                Pretendo subscrever um número limitado de pesquisas
+              </label>
+            </div>
+            <br />
+            
+            <button type="submit" id="submitButton" class="btn btn-dark btn-block" disabled>
+              Submeter
+            </button>
+          
+            <br><br>
+            <p id="sign_up">Já tens conta? <a href="/users/login">Efetuar login</a><br></p>
+          </form>
       </div>
     </div>
   </div>
@@ -58,3 +68,30 @@
 <%- include('../partials/bootstrapScripts.ejs') %>
 
     </html>
+
+
+    <script>
+      const password = document.getElementById('password');
+      const confirmPassword = document.getElementById('confirmPassword');
+      const submitButton = document.getElementById('submitButton');
+      const mismatchMessage = document.getElementById('passwordMismatchMessage');
+
+      function validatePasswords() {
+        if (!password.value || !confirmPassword.value) {
+          submitButton.disabled = true;
+          mismatchMessage.style.display = 'none';
+          return;
+        }
+
+        if (password.value === confirmPassword.value) {
+          submitButton.disabled = false;
+          mismatchMessage.style.display = 'none';
+        } else {
+          submitButton.disabled = true;
+          mismatchMessage.style.display = 'inline';
+        }
+      }
+
+      password.addEventListener('input', validatePasswords);
+      confirmPassword.addEventListener('input', validatePasswords);
+    </script>
