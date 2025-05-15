@@ -20,7 +20,7 @@ const search = (req, res) => {
             method: "get",
             url: process.env.URL,
             user: req.session.user,
-            message: null
+            message: null,
           });
         });
       break;
@@ -87,8 +87,6 @@ const search = (req, res) => {
         beginDate = "";
       }
 
-      console.log("end date");
-
       let endDate = "";
       if (
         req.body.endDate != null &&
@@ -131,11 +129,12 @@ const search = (req, res) => {
                 endDate
             )
             .then((entries) => {
+              // console.log('Pesquisa efetuada por: '+req.session.user == undefined
+              //   ? "Undefined"
+              //   : req.session.user.email);
+              console.log("Pesquisa efetuada por: " + req.session.user.email);
               console.log(req.body);
-              req.session.user == undefined
-                ? console.log("Undefined")
-                : console.log(req.session.user.email);
-              console.log(entries[0][0].entries);
+              console.log("Resultados obtidos: " + entries[0][0].entries);
               connection
                 .query(
                   `SELECT courtID, courtName, beginDate, endDate, datas, stringDate, intervenientes, processo, informacao, createdAt, updatedAt FROM lawSuits WHERE 1=1 ` +
@@ -152,13 +151,16 @@ const search = (req, res) => {
                     `;`
                 )
                 .then((lawSuits) => {
-                  if (entries[0][0].entries != 0 && req.session.user.billingScheme == 'clicks') {
+                  if (
+                    entries[0][0].entries != 0 &&
+                    req.session.user.billingScheme == "clicks"
+                  ) {
                     User.update(
-                      { clicks: (Number(req.session.user.clicks)-1) },
+                      { clicks: Number(req.session.user.clicks) - 1 },
                       { where: { email: req.session.user.email } }
-                    )
-                    .then(()=> {
-                      req.session.user.clicks = (Number(req.session.user.clicks)-1);
+                    ).then(() => {
+                      req.session.user.clicks =
+                        Number(req.session.user.clicks) - 1;
                       res.render("search", {
                         courts: courts,
                         lawSuits: lawSuits,
@@ -168,9 +170,9 @@ const search = (req, res) => {
                         method: "post",
                         url: process.env.URL,
                         user: req.session.user,
-                        message: null
+                        message: null,
                       });
-                    })
+                    });
                   } else {
                     res.render("search", {
                       courts: courts,
@@ -181,7 +183,7 @@ const search = (req, res) => {
                       method: "post",
                       url: process.env.URL,
                       user: req.session.user,
-                      message: null
+                      message: null,
                     });
                   }
                   // =====================

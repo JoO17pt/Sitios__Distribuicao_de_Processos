@@ -43,6 +43,8 @@ const register = (req, res) => {
                 message: null,
                 message1: true,
               });
+              console.log('Novo utilizador registado: '+req.body.email);
+              console.log(req.body);
             })
             .catch((err) => {
               res.render("users/register", {
@@ -57,7 +59,6 @@ const register = (req, res) => {
           });
         }
       });
-      console.log(req.body);
       break;
   }
 };
@@ -100,6 +101,7 @@ const login = (req, res) => {
                   message: true,
                 });
               });
+              console.log('Utilizador efetuou login: '+req.body.email)
           } else {
             res.render("users/login", {
               user: req.session.user,
@@ -120,6 +122,7 @@ const login = (req, res) => {
 };
 
 const logout = (req, res) => {
+  console.log('Utilizador efetuou logout: '+req.session.user.email)
   req.session.destroy();
   res.redirect("/");
 };
